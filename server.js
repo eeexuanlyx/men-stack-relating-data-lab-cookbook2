@@ -6,6 +6,7 @@ const isSignedIn = require("./middleware/is-signed-in.js");
 const connectDB = require("./db/db.js");
 const authRouter = require("./routers/auth.js");
 const foodsRouter = require("./routers/food.js");
+const usersRouter = require("./routers/user.js");
 
 connectDB();
 
@@ -16,6 +17,7 @@ app.use(morgan("dev"));
 app.use("/auth", authRouter);
 app.use(isSignedIn);
 app.use("/users/foods", foodsRouter);
+app.use("/users", usersRouter);
 
 const PORT = process.env.PORT ? process.env.PORT : "5001";
 

@@ -16,6 +16,7 @@ const isSignedIn = (req, res, next) => {
       next();
     } catch (error) {
       console.error(error.message);
+      console.log("Decoded token:", req.decoded);
       return res.status(401).json({
         status: "error",
         msg: "unauthorised",

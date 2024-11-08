@@ -1,8 +1,8 @@
 const User = require("../models/Users");
 
-const postFood = async (req, res) => {
+const createFood = async (req, res) => {
   try {
-    const user = await User.findById(req.decoded.id);
+    const user = await User.findOne({ username: req.decoded.username });
 
     if (!user) {
       return res.status(404).json({ status: "error", msg: "User not found" });
@@ -22,4 +22,19 @@ const postFood = async (req, res) => {
   }
 };
 
-module.exports = { postFood };
+const getFood = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.decoded.username });
+
+    if (!user) {
+      return res.status(404).json({ status: "error", msg: "User not found" });
+    }
+
+    res.json({ pantry: user.pantry });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: "error", msg: "Error getting user pantry" });
+  }
+};
+
+module.exports = { createFood, getFood };
