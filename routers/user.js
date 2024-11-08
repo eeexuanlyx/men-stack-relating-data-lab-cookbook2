@@ -1,7 +1,8 @@
 const express = require("express");
-const { getAllUsers } = require("../controllers/user");
+const { getAllUsers, getUserPantry } = require("../controllers/user");
 const router = express.Router();
 
-router.get("/users", getAllUsers);
+router.get("/", getAllUsers);
+router.get("/:userId", getUserPantry);
 
 module.exports = router;
